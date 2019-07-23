@@ -1,8 +1,6 @@
 package guru.springframework.sfgpetclinic.services;
 
 import java.util.Set;
-
-import guru.springframework.sfgpetclinic.model.Owner;
 /**
  * mimic Crudrepository
  * @author david
@@ -14,9 +12,9 @@ public interface CrudService <T, ID>{
 
 	Set<T> findAll();
 
-	Owner findById(ID id);
+	T findById(ID id);
 
-	Owner save(T object);
+	T save(T object);
 
 	void delete(T object);
 	
