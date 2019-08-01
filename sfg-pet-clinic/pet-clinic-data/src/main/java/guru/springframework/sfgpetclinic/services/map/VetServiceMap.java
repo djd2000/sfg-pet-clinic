@@ -3,9 +3,9 @@ package guru.springframework.sfgpetclinic.services.map;
 import java.util.Set;
 
 import guru.springframework.sfgpetclinic.model.Vet;
-import guru.springframework.sfgpetclinic.services.CrudService;
+import guru.springframework.sfgpetclinic.services.VetService;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
 
 //	@Override
 //	public Owner save(Vet object) {
@@ -35,6 +35,12 @@ public class VetServiceMap extends AbstractMapService<Vet, Long> implements Crud
 	@Override
 	public void delete(Vet object) {
 		super.delete(object);
+	}
+
+	@Override
+	public Vet findByLastName(String lastName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
