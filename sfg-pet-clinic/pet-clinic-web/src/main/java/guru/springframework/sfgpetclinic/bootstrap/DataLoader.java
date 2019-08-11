@@ -62,6 +62,16 @@ public class DataLoader implements CommandLineRunner {
 		owner1.setCity("Miami");
 		owner1.setTelephone("123123");
 //		owner1.setId(1L);
+		Pet mikesPet = new Pet();
+		mikesPet.setPetType(savedDogPetType);
+//		PetType parrot = new PetType();
+//		parrot.setName("Parrot");
+//		mikesPet.setPetType(parrot);
+		mikesPet.setOwner(owner1);
+		mikesPet.setBirthDate(LocalDate.now().minusDays(5));
+		mikesPet.setName("Rosco");
+		owner1.getPets().add(mikesPet);
+		ownerService.save(owner1);
 
 		Owner owner2 = new Owner();
 		owner2.setFirstName("Fiona");
@@ -70,32 +80,39 @@ public class DataLoader implements CommandLineRunner {
 		owner2.setCity("Miami");
 		owner2.setTelephone("123123");
 //		owner2.setId(2L);
-
-		ownerService.save(owner1);
-
-		Pet mikesPet = new Pet();
-		mikesPet.setPetType(savedDogPetType);
-		mikesPet.setOwner(owner1);
-		mikesPet.setBirthDate(LocalDate.now().minusDays(5));
-		mikesPet.setName("Rosco");
-		petService.save(mikesPet);
-
-		Set<Pet> pets1 = new HashSet<Pet>();
-		pets1.add(mikesPet);
-		owner1.setPets(pets1);
-		ownerService.save(owner1);
-
 		Pet fionasPet = new Pet();
 		fionasPet.setPetType(savedCatPetType);
 		fionasPet.setOwner(owner2);
 		fionasPet.setBirthDate(LocalDate.now().minusYears(1));
 		fionasPet.setName("Just Cat");
-		petService.save(fionasPet);
-
-		Set<Pet> pets2 = new HashSet<Pet>();
-		pets2.add(fionasPet);
-		owner2.setPets(pets2);
+		owner2.getPets().add(fionasPet);
 		ownerService.save(owner2);
+
+//		ownerService.save(owner1);
+
+//		Pet mikesPet = new Pet();
+//		mikesPet.setPetType(savedDogPetType);
+//		mikesPet.setOwner(owner1);
+//		mikesPet.setBirthDate(LocalDate.now().minusDays(5));
+//		mikesPet.setName("Rosco");
+//		petService.save(mikesPet);
+
+//		Set<Pet> pets1 = new HashSet<Pet>();
+//		pets1.add(mikesPet);
+//		owner1.setPets(pets1);
+//		ownerService.save(owner1);
+
+//		Pet fionasPet = new Pet();
+//		fionasPet.setPetType(savedCatPetType);
+//		fionasPet.setOwner(owner2);
+//		fionasPet.setBirthDate(LocalDate.now().minusYears(1));
+//		fionasPet.setName("Just Cat");
+//		petService.save(fionasPet);
+
+//		Set<Pet> pets2 = new HashSet<Pet>();
+//		pets2.add(fionasPet);
+//		owner2.setPets(pets2);
+//		ownerService.save(owner2);
 
 		System.out.println("Loaded pet types....");
 		for (PetType petType : petTypeService.findAll()) {
@@ -103,13 +120,12 @@ public class DataLoader implements CommandLineRunner {
 		}
 		System.out.println();
 
-		ownerService.save(owner2);
 
 		System.out.println("Loaded owners....");
 		for (Owner owner : ownerService.findAll()) {
 			System.out.println(owner.getId() + " " + owner.getFirstName() + " " + owner.getAddress());
 			for (Pet pet : owner.getPets()) {
-				System.out.println("\t" + pet.getId() + " " + pet.getPetType().getName() + " " + pet.getBirthDate().toString());
+				System.out.println("\t" + "PetID:" + pet.getId() + " PetType:" + pet.getPetType().getName() + " " + " PetTypeID:" + pet.getPetType().getId() + " " + pet.getBirthDate().toString());
 			}
 		}
 		System.out.println();
