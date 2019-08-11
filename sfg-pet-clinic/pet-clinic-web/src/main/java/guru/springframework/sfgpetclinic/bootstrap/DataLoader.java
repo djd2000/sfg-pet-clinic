@@ -13,10 +13,12 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.model.PetType;
+import guru.springframework.sfgpetclinic.model.Speciality;
 import guru.springframework.sfgpetclinic.model.Vet;
 import guru.springframework.sfgpetclinic.services.OwnerService;
 import guru.springframework.sfgpetclinic.services.PetService;
 import guru.springframework.sfgpetclinic.services.PetTypeService;
+import guru.springframework.sfgpetclinic.services.SpecialityService;
 import guru.springframework.sfgpetclinic.services.VetService;
 import guru.springframework.sfgpetclinic.services.map.OwnerServiceMap;
 import guru.springframework.sfgpetclinic.services.map.VetServiceMap;
@@ -28,6 +30,7 @@ public class DataLoader implements CommandLineRunner {
 	private final VetService vetService;
 	private final PetTypeService petTypeService;
 	private final PetService petService;
+	private final SpecialityService specialityService;
 
 //	public DataLoader() {
 //		super();
@@ -36,17 +39,61 @@ public class DataLoader implements CommandLineRunner {
 //	}
 
 	public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-			PetService petService) {
+			PetService petService, SpecialityService specialityService) {
 		super();
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
 		this.petService = petService;
+		this.specialityService = specialityService;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 
+		int count = petService.findAll().size();
+		if (count == 0) {
+			loadData();
+		}
+
+		printData();
+
+	}
+
+	public void printData() {
+		System.out.println("Loaded pet types....");
+		for (PetType petType : petTypeService.findAll()) {
+			System.out.println(petType.getId() + " " + petType.getName());
+		}
+		System.out.println();
+
+		System.out.println("Loaded owners....");
+		for (Owner owner : ownerService.findAll()) {
+			System.out.println(owner.getId() + " " + owner.getFirstName() + " " + owner.getAddress());
+			for (Pet pet : owner.getPets()) {
+				System.out.println("\t" + "PetID:" + pet.getId() + " PetType:" + pet.getPetType().getName() + " "
+						+ " PetTypeID:" + pet.getPetType().getId() + " " + pet.getBirthDate().toString());
+			}
+		}
+		System.out.println();
+
+		System.out.println("Loaded pets....");
+		for (Pet pet : petService.findAll()) {
+			System.out.println(pet.getId() + " " + pet.getPetType().getName() + " " + pet.getOwner().getFirstName());
+		}
+		System.out.println();
+
+		System.out.println("Loaded vets....");
+		vetService.findAll().forEach(vet -> {
+			System.out.println(vet.getId() + " " + vet.getFirstName());
+			vet.getSpecialities().forEach(specialty -> {
+				System.out.println("\t" + specialty.getId() + " " + specialty.getDescription());
+			});
+
+		});
+	}
+
+	public void loadData() {
 		PetType dog = new PetType();
 		dog.setName("Dog");
 		PetType savedDogPetType = petTypeService.save(dog);
@@ -54,6 +101,18 @@ public class DataLoader implements CommandLineRunner {
 		PetType cat = new PetType();
 		cat.setName("Cat");
 		PetType savedCatPetType = petTypeService.save(cat);
+
+		Speciality radiology = new Speciality();
+		radiology.setDescription("radiology");
+		Speciality savedRadiology = specialityService.save(radiology);
+
+		Speciality surgery = new Speciality();
+		surgery.setDescription("surgery");
+		Speciality savedSurgery = specialityService.save(surgery);
+
+		Speciality dentistry = new Speciality();
+		dentistry.setDescription("dentistry");
+		Speciality savedDentistry = specialityService.save(dentistry);
 
 		Owner owner1 = new Owner();
 		owner1.setFirstName("Michael");
@@ -114,32 +173,11 @@ public class DataLoader implements CommandLineRunner {
 //		owner2.setPets(pets2);
 //		ownerService.save(owner2);
 
-		System.out.println("Loaded pet types....");
-		for (PetType petType : petTypeService.findAll()) {
-			System.out.println(petType.getId() + " " + petType.getName());
-		}
-		System.out.println();
-
-
-		System.out.println("Loaded owners....");
-		for (Owner owner : ownerService.findAll()) {
-			System.out.println(owner.getId() + " " + owner.getFirstName() + " " + owner.getAddress());
-			for (Pet pet : owner.getPets()) {
-				System.out.println("\t" + "PetID:" + pet.getId() + " PetType:" + pet.getPetType().getName() + " " + " PetTypeID:" + pet.getPetType().getId() + " " + pet.getBirthDate().toString());
-			}
-		}
-		System.out.println();
-
-		System.out.println("Loaded pets....");
-		for (Pet pet : petService.findAll()) {
-			System.out.println(pet.getId() + " " + pet.getPetType().getName() + " " + pet.getOwner().getFirstName());
-		}
-		System.out.println();
-
 		Vet vet1 = new Vet();
 //		vet1.setId(1L);
 		vet1.setFirstName("Sam");
 		vet1.setLastName("Axe");
+		vet1.getSpecialities().add(savedRadiology);
 
 		vetService.save(vet1);
 
@@ -147,11 +185,9 @@ public class DataLoader implements CommandLineRunner {
 //		vet2.setId(2L);
 		vet2.setFirstName("Jessie");
 		vet2.setLastName("Porter");
+		vet2.getSpecialities().add(savedSurgery);
 
 		vetService.save(vet2);
-
-		System.out.println("Loaded vets....");
-
 	}
 
 }
