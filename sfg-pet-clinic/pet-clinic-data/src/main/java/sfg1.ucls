@@ -45,9 +45,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="guru.springframework.sfgpetclinic.services.map.PetServiceMap" 
+  <class id="5" language="java" name="guru.springframework.sfgpetclinic.services.map.PetMapService" 
     project="pet-clinic-data" 
-    file="/pet-clinic-data/src/main/java/guru/springframework/sfgpetclinic/services/map/PetServiceMap.java" 
+    file="/pet-clinic-data/src/main/java/guru/springframework/sfgpetclinic/services/map/PetMapService.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="283" y="556"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -56,9 +56,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="guru.springframework.sfgpetclinic.services.map.VetServiceMap" 
+  <class id="6" language="java" name="guru.springframework.sfgpetclinic.services.map.VetMapService" 
     project="pet-clinic-data" 
-    file="/pet-clinic-data/src/main/java/guru/springframework/sfgpetclinic/services/map/VetServiceMap.java" 
+    file="/pet-clinic-data/src/main/java/guru/springframework/sfgpetclinic/services/map/VetMapService.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="532" y="565"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -78,9 +78,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="guru.springframework.sfgpetclinic.services.map.OwnerServiceMap" 
+  <class id="8" language="java" name="guru.springframework.sfgpetclinic.services.map.OwnerMapService" 
     project="pet-clinic-data" 
-    file="/pet-clinic-data/src/main/java/guru/springframework/sfgpetclinic/services/map/OwnerServiceMap.java" 
+    file="/pet-clinic-data/src/main/java/guru/springframework/sfgpetclinic/services/map/OwnerMapService.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="781" y="565"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -89,37 +89,37 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="9">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <generalization id="10">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <realization id="11">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="12">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <generalization id="13">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <realization id="14">    
+  <realization id="9">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <generalization id="15">    
+  <generalization id="10">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="12">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
-  <generalization id="16">    
+  <realization id="13">    
     <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="14">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="16">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
   </generalization>  
   <generalization id="17">    
     <end type="SOURCE" refId="1"/>    

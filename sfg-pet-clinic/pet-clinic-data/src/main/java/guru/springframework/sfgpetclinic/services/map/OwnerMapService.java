@@ -2,24 +2,21 @@ package guru.springframework.sfgpetclinic.services.map;
 
 import java.util.Set;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.stereotype.Service;
 
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.model.Pet;
-import guru.springframework.sfgpetclinic.model.PetType;
 import guru.springframework.sfgpetclinic.services.OwnerService;
 import guru.springframework.sfgpetclinic.services.PetService;
 import guru.springframework.sfgpetclinic.services.PetTypeService;
 
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
 	private final PetService petService;
 	private final PetTypeService petTypeService;
 
-	public OwnerServiceMap(PetService petService, PetTypeService petTypeService) {
+	public OwnerMapService(PetService petService, PetTypeService petTypeService) {
 		super();
 		this.petService = petService;
 		this.petTypeService = petTypeService;
