@@ -52,7 +52,7 @@ public class DataLoader implements CommandLineRunner {
 			loadData();
 		}
 
-		printData();
+//		printData();
 
 	}
 
